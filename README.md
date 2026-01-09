@@ -1,1 +1,63 @@
-# pjpankur-collab.ap.github.io
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login / Register</title>
+</head>
+<body>
+
+  <h2>Register</h2>
+  <input type="email" id="regEmail" placeholder="Email"><br><br>
+  <input type="password" id="regPassword" placeholder="Password"><br><br>
+  <button onclick="register()">Register</button>
+
+  <hr>
+
+  <h2>Login</h2>
+  <input type="email" id="logEmail" placeholder="Email"><br><br>
+  <input type="password" id="logPassword" placeholder="Password"><br><br>
+  <button onclick="login()">Login</button>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+
+  <script>
+    // 🔴 YAHAN APNI FIREBASE KEYS DAALO
+    const firebaseConfig = {
+      apiKey: "AIzaSyDbPUCufg0PHVG1cSK7gHre5RE1Ho_wPM",
+      authDomain: "calorie-tracker-f5fcd.firebaseapp.com.",
+      projectId: "calorie-tracker-f5fcd",
+      appId: "1:533945021220:web:535ab0cb6913f50179f9b1"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Register
+    function register() {
+      const email = document.getElementById("regEmail").value;
+      const password = document.getElementById("regPassword").value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          alert("Registration successful");
+        })
+        .catch(error => alert(error.message));
+    }
+
+    // Login
+    function login() {
+      const email = document.getElementById("logEmail").value;
+      const password = document.getElementById("logPassword").value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          window.location.href = "welcome.html";
+        })
+        .catch(error => alert("Wrong email or password"));
+    }
+  </script>
+
+</body>
+</html>
